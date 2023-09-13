@@ -5,6 +5,6 @@ export default class Controller{
     }
 
     init() {
-        this.model.getPosts()
+        this.model.getPosts(this.view.createPost.bind(this.view))
     }
 }

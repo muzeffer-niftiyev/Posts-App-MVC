@@ -1,12 +1,12 @@
 export default class Model {
   constructor() {}
 
-  async getPosts() {
+  async getPosts(callback) {
     try {
       const api = await fetch("https://jsonplaceholder.typicode.com/posts");
       const data = await api.json();
-
-      console.log(data);
+      
+      data.forEach(post => callback(post.title));
     } catch (err) {
       console.log(err);
     }
