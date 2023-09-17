@@ -1,14 +1,33 @@
 export default class Model {
-  constructor() {}
+  constructor() {
+    this.API = "https://jsonplaceholder.typicode.com/";
+  }
 
-  async getPosts(callback) {
+  async getPosts(callback, showLoader, hideLoader) {
     try {
-      const api = await fetch("https://jsonplaceholder.typicode.com/posts");
+      showLoader();
+      const api = await fetch(`${this.API}posts`);
       const data = await api.json();
+      const edited = data.slice(0, 10);
       
-      data.forEach(post => callback(post.title));
-    } catch (err) {
-      console.log(err);
+      edited.forEach((post) => callback(post.title, post.id, false));
+      hideLoader();
+    } catch {
+      callback(null, true);
+    }
+  }
+
+  async deletePost(id, callback) {
+    try {
+      const api = await fetch(`${this.API}posts/${id}`, {
+        method: "DELETE"
+      });
+      
+      if(api.ok) {
+        callback(id)
+      } 
+    } catch {
+      throw new Error("Unexpected error occured!");
     }
   }
 }
