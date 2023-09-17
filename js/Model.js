@@ -30,4 +30,25 @@ export default class Model {
       throw new Error("Unexpected error occured!");
     }
   }
+
+  async showPostData(id, callback) {
+    try{
+      const api = await fetch(`${this.API}posts/${id}`);
+      const data = await api.json();
+
+      callback(data.title, data.body);
+    }catch{
+      throw new Error("Unexpected error occured!");
+    }
+  }
+
+  async getComments(id) {
+    try{
+      const api = await fetch(`${this.API}comments/${id}`);
+      const data = api.json();
+      console.log(data);
+    }catch{
+      throw new Error("Unexpected error occured!");
+    }
+  }
 }
