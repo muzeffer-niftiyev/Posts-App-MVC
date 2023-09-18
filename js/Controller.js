@@ -16,9 +16,13 @@ export default class Controller {
       this.model.showPostData(id, (title, content) => {
         this.view.setValues(title, content);
       });
+
+      this.model.showComments(id, (name, email, body) => {
+        this.view.createComments(name, email, body);
+      });
     });
 
-    
+    this.view.createPostButtonHandler((title, body) => this.model.createNewPost(title, body, (title, id) => this.view.createPost(title, id)));
   }
 
   loadPosts() {

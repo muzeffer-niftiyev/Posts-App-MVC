@@ -1,7 +1,6 @@
 export default class View {
   constructor() {
     this.header = document.querySelector("header h2");
-    this.createBtn = document.querySelector("header button");
     this.postsContainer = document.querySelector(".posts");
     this.loader = document.querySelector(".loader");
     this.mainPage = document.querySelector(".posts_container");
@@ -11,11 +10,32 @@ export default class View {
     this.postPageCommentsContainer = document.querySelector(
       ".comments_container"
     );
+    this.mainPageCreateBtn = document.querySelector(".main_create");
+    this.postPageCreateBtn = document.querySelector(".selected_create");
+    this.createPageCreateBtn = document.querySelector(".create_btn");
+    this.createPostPage = document.querySelector(".create_post");
+    this.createPageCancelBtn = document.querySelector(".cancel_btn");
+    this.titleInput = document.querySelector(".title_input");
+    this.bodyInput = document.querySelector(".body_input");
 
     this.postPageGoBackBtn.addEventListener("click", () => {
       this.postPage.classList.add("hidden");
       this.mainPage.classList.remove("hidden");
       this.clearValues.call(this);
+    });
+
+    this.mainPageCreateBtn.addEventListener(
+      "click",
+      this.moveToCreatePage.bind(this)
+    );
+    this.postPageCreateBtn.addEventListener(
+      "click",
+      this.moveToCreatePage.bind(this)
+    );
+
+    this.createPageCancelBtn.addEventListener("click", () => {
+      this.moveToMainPage();
+      this.titleInput.value = this.bodyInput.value = null;
     });
   }
 
@@ -103,5 +123,45 @@ export default class View {
 
   clearValues() {
     this.postPageContent.innerHTML = null;
+    this.postPageCommentsContainer.innerHTML = null;
+  }
+
+  createComments(name, email, body) {
+    const formattedName = name.split(" ").slice(0, 2).join(" ");
+    const html = `
+      <div class="comment">
+        <div class="comment_title">
+          <p>${formattedName} / ${email}</p>
+        </div>
+        <h4>${body}</h4>
+      </div>
+    `;
+
+    this.postPageCommentsContainer.insertAdjacentHTML("beforeend", html);
+  }
+
+  moveToCreatePage() {
+    this.mainPage.classList.add("hidden");
+    this.postPage.classList.add("hidden");
+    this.createPostPage.classList.remove("hidden");
+  }
+
+  moveToMainPage() {
+    this.postPage.classList.add("hidden");
+    this.createPostPage.classList.add("hidden");
+    this.mainPage.classList.remove("hidden");
+  }
+
+  createPostButtonHandler(callback) {
+    this.createPageCreateBtn.addEventListener("click", () => {
+      let titleData = this.titleInput.value;
+      let bodyData = this.bodyInput.value;
+
+      if (!titleData || !bodyData) return;
+      callback(titleData, bodyData);
+
+      this.titleInput.value = this.bodyInput.value = null;
+      this.moveToMainPage();
+    });
   }
 }
