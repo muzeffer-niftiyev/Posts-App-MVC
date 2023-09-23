@@ -1,6 +1,5 @@
 export default class View {
   constructor() {
-    this.header = document.querySelector("header h2");
     this.postsContainer = document.querySelector(".posts");
     this.loader = document.querySelector(".loader");
     this.mainPage = document.querySelector(".posts_container");
@@ -17,26 +16,6 @@ export default class View {
     this.createPageCancelBtn = document.querySelector(".cancel_btn");
     this.titleInput = document.querySelector(".title_input");
     this.bodyInput = document.querySelector(".body_input");
-
-    this.postPageGoBackBtn.addEventListener("click", () => {
-      this.postPage.classList.add("hidden");
-      this.mainPage.classList.remove("hidden");
-      this.clearValues.call(this);
-    });
-
-    this.mainPageCreateBtn.addEventListener(
-      "click",
-      this.moveToCreatePage.bind(this)
-    );
-    this.postPageCreateBtn.addEventListener(
-      "click",
-      this.moveToCreatePage.bind(this)
-    );
-
-    this.createPageCancelBtn.addEventListener("click", () => {
-      this.moveToMainPage();
-      this.titleInput.value = this.bodyInput.value = null;
-    });
   }
 
   createPost(post, postId) {
@@ -163,5 +142,34 @@ export default class View {
       this.titleInput.value = this.bodyInput.value = null;
       this.moveToMainPage();
     });
+  }
+
+  postPageGoBackBtnHandler() {
+    this.postPageGoBackBtn.addEventListener("click", () => {
+      this.postPage.classList.add("hidden");
+      this.mainPage.classList.remove("hidden");
+      this.clearValues.call(this);
+    });
+  }
+
+  mainPageCreateBtnHandler() {
+    this.mainPageCreateBtn.addEventListener(
+      "click",
+      this.moveToCreatePage.bind(this)
+    );
+  }
+
+  createPageCancelBtnHandler() {
+    this.createPageCancelBtn.addEventListener("click", () => {
+      this.moveToMainPage();
+      this.titleInput.value = this.bodyInput.value = null;
+    });
+  }
+
+  postPageCreateBtnHandler() {
+    this.postPageCreateBtn.addEventListener(
+      "click",
+      this.moveToCreatePage.bind(this)
+    );
   }
 }

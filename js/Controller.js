@@ -23,6 +23,11 @@ export default class Controller {
     });
 
     this.view.createPostButtonHandler((title, body) => this.model.createNewPost(title, body, (title, id) => this.view.createPost(title, id)));
+
+    this.view.postPageGoBackBtnHandler();
+    this.view.mainPageCreateBtnHandler();
+    this.view.createPageCancelBtnHandler();
+    this.view.postPageCreateBtnHandler();
   }
 
   loadPosts() {
