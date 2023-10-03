@@ -22,7 +22,7 @@ export default class View {
     const titleWords = post?.split(" ");
     const editedTitle = `${titleWords.slice(0, 5).join(" ")}...`;
     const html = `
-      <div class="post" data-post-id="${postId}">
+      <div class='post ${postId > 30 ? "new" : ""}' data-post-id="${postId}">
         <div class="post_title">
           <h3>${editedTitle}</h3>
         </div>
@@ -33,7 +33,7 @@ export default class View {
       </div>
     `;
 
-    this.postsContainer.insertAdjacentHTML("beforeend", html);
+    this.postsContainer.insertAdjacentHTML("afterbegin", html);
   }
 
   showLoader() {
@@ -80,7 +80,8 @@ export default class View {
     this.postsContainer.addEventListener("click", (e) => {
       const post = e.target.closest(".post");
       const deleteBtn = e.target.closest("button");
-      if (deleteBtn || !post) return;
+      const isNew = e.target.classList.contains("new");
+      if (deleteBtn || !post || isNew) return;
 
       this.mainPage.classList.add("hidden");
       this.postPage.classList.remove("hidden");

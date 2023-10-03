@@ -9,7 +9,7 @@ export default class Model {
       showLoader();
       const api = await fetch(`${this.API}posts`);
       const data = await api.json();
-      const edited = data.slice(0, 20);
+      const edited = data.slice(0, 30);
 
       this.posts = edited;
 
