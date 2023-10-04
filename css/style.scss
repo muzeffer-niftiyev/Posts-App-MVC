@@ -1,0 +1,257 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: linear-gradient(
+      to right bottom,
+      rgb(194, 105, 51),
+      rgb(206, 49, 49)
+    )
+    no-repeat center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.posts_container,
+.selected_post,
+.create_post {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: #ddd;
+  padding: 50px;
+  border-radius: 8px;
+  width: 700px;
+  min-height: 800px;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      font-size: 34px;
+    }
+
+    button {
+      font-size: 22px;
+      color: #fff;
+      cursor: pointer;
+      padding: 7px 12px;
+      border: 2px solid rgb(16, 119, 24);
+      background-color: rgb(20, 158, 31);
+    }
+  }
+
+  .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto 20px;
+    width: 100%;
+
+    .post {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 80px;
+      border: 3px solid #333;
+      padding: 10px 20px;
+      cursor: pointer;
+
+      h3 {
+        font-size: 21px;
+      }
+
+      button {
+        border: none;
+        background-color: inherit;
+        font-size: 35px;
+        color: rgb(209, 18, 18);
+        font-weight: bolder;
+        cursor: pointer;
+      }
+    }
+
+    p {
+      font-size: 24px;
+    }
+  }
+}
+
+.loader {
+  display: none;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid rgb(206, 49, 49);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin-top: 50px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.selected_post {
+  .go_back {
+    font-size: 28px;
+    margin-top: 30px;
+    padding: 0px 20px;
+    padding-bottom: 3px;
+    cursor: pointer;
+    color: #fff;
+    border: 2px solid darken(rgb(194, 105, 51), 10%);
+    background-color: rgb(194, 105, 51);
+  }
+
+  .post_data {
+    padding: 0px 50px;
+
+    h3 {
+      width: 100%;
+      font-size: 26px;
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      width: 100%;
+      height: 250px;
+      padding: 20px;
+      outline: none;
+      border: 3px solid #333;
+      background-color: #eee;
+
+      p {
+        font-size: 20px;
+        color: #333;
+      }
+    }
+  }
+
+  .comments {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 90px;
+    margin-top: 50px;
+
+    h3 {
+      font-size: 26px;
+    }
+
+    .comments_container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 25px;
+
+      .comment {
+        margin-bottom: 15px;
+        border: 3px solid #333;
+
+        .comment_title {
+          background-color: rgb(52, 151, 231);
+          padding: 5px 15px;
+
+          p {
+            font-size: 18px;
+          }
+        }
+
+        h4 {
+          background-color: #eee;
+          padding: 15px;
+        }
+      }
+    }
+  }
+}
+
+.create_post {
+  min-height: 550px;
+
+  .forms_container {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    align-items: center;
+    margin-top: 40px;
+
+    .form_title,
+    .form_text {
+      display: flex;
+      gap: 25px;
+      font-size: 24px;
+      width: 100%;
+      padding: 0px 30px;
+
+      input {
+        border: 3px solid #333;
+        outline: none;
+        padding: 5px;
+        font-size: 22px;
+        color: #333;
+      }
+
+      textarea {
+        border: 3px solid #333;
+        outline: none;
+        padding: 5px;
+        font-size: 20px;
+        width: 100%;
+        height: 200px;
+      }
+    }
+  }
+
+  .create_buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      padding: 0px 30px;
+      margin-top: 40px;
+
+      .create_btn {
+        font-size: 22px;
+        color: #fff;
+        cursor: pointer;
+        padding: 7px 12px;
+        border: 2px solid rgb(16, 119, 24);
+        background-color: rgb(20, 158, 31);
+      }
+
+      .cancel_btn {
+        font-size: 22px;
+        color: #fff;
+        cursor: pointer;
+        padding: 7px 12px;
+        border: 2px solid darken(rgb(206, 42, 21), 8%);
+        background-color: rgb(230, 55, 32);
+      }
+    }
+}
