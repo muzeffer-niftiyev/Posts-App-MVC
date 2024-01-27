@@ -4,7 +4,7 @@
 
 ## 📝 Description
 
-Welcome to the Posts App 🤩! \n
+Welcome to the Posts App 🤩! <br>
 This project is mainly for showing post. It fetches posts datas and shows them, but also you can create your own posts.
 
 #### 💻 Technologies
