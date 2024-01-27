@@ -1,26 +1,29 @@
 export default class View {
   constructor() {
-    this.postsContainer = document.querySelector(".posts");
     this.loader = document.querySelector(".loader");
-    this.mainPage = document.querySelector(".posts_container");
+    this.bodyInput = document.querySelector(".body_input");
+    this.postsContainer = document.querySelector(".posts");
+    this.titleInput = document.querySelector(".title_input");
     this.postPage = document.querySelector(".selected_post");
+    this.mainPage = document.querySelector(".posts_container");
     this.postPageGoBackBtn = document.querySelector(".go_back");
     this.postPageContent = document.querySelector(".post_data");
+    this.createPostPage = document.querySelector(".create_post");
+    this.mainPageCreateBtn = document.querySelector(".main_create");
+    this.createPageCreateBtn = document.querySelector(".create_btn");
+    this.createPageCancelBtn = document.querySelector(".cancel_btn");
+    this.postPageCreateBtn = document.querySelector(".selected_create");
     this.postPageCommentsContainer = document.querySelector(
       ".comments_container"
     );
-    this.mainPageCreateBtn = document.querySelector(".main_create");
-    this.postPageCreateBtn = document.querySelector(".selected_create");
-    this.createPageCreateBtn = document.querySelector(".create_btn");
-    this.createPostPage = document.querySelector(".create_post");
-    this.createPageCancelBtn = document.querySelector(".cancel_btn");
-    this.titleInput = document.querySelector(".title_input");
-    this.bodyInput = document.querySelector(".body_input");
   }
 
   createPost(post, postId) {
     const titleWords = post?.split(" ");
-    const editedTitle = `${titleWords.slice(0, 5).join(" ")}...`;
+    const editedTitle = `${titleWords.slice(0, 5).join(" ")} ${
+      titleWords.length > 5 ? "..." : ""
+    }`;
+
     const html = `
       <div class='post ${postId > 30 ? "new" : ""}' data-post-id="${postId}">
         <div class="post_title">
